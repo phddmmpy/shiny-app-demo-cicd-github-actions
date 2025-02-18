@@ -31,7 +31,18 @@ jobs:
         shell: Rscript {0}
         run: |
           rsconnect::writeManifest()
-          
+
+      - name: Generate HTML Output
+        run: |
+          # Your command to generate HTML, such as running a R script or any process that produces HTML.
+          Rscript generate_html_script.R
+
+      - name: Upload HTML as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: shiny-app-output
+          path: ./path/to/generated/html/output.html
+
       - name: Publish Connect content
         uses: rstudio/actions/connect-publish@main
         with:
