@@ -12,23 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: List files in the repository
-        run: |
-          echo "Listing all files in the repository..."
-          ls -R
-
-      - name: Test Connectivity to RStudio Connect
-        run: |
-          echo "Testing connectivity to RStudio Connect server..."
-          curl -I -H "Authorization: Key ${{ secrets.CONNECT_API_KEY }}" ${{ secrets.CONNECT_SERVER }}/__api__/v1/content
-        env:
-          CONNECT_SERVER: ${{ secrets.CONNECT_SERVER }}
-          CONNECT_API_KEY: ${{ secrets.CONNECT_API_KEY }}
-
-      - name: List files in the directory
-        run: |
-          ls -la ./
-
       - uses: r-lib/actions/setup-pandoc@v2
 
       - uses: r-lib/actions/setup-r@v2
@@ -42,16 +25,11 @@ jobs:
         shell: Rscript {0}
         run: |
           shinytest2::test_app()
-        continue-on-error: true
           
       - name: Create manifest.json
         shell: Rscript {0}
         run: |
           rsconnect::writeManifest()
-
-      - name: Debug Connect Server Response
-        run: |
-          curl -I -H "Authorization: Key ${{ secrets.CONNECT_API_KEY }}" ${{ secrets.CONNECT_SERVER }}
           
       - name: Publish Connect content
         uses: rstudio/actions/connect-publish@main
@@ -59,4 +37,5 @@ jobs:
           url: ${{ secrets.CONNECT_SERVER }}
           api-key: ${{ secrets.CONNECT_API_KEY }}
           access-type: logged_in
-          dir: app
+          dir: |
+            .:/shiny-app-demo-cicd-github-actions
