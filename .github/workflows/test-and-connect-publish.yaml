@@ -47,7 +47,6 @@ jobs:
       - name: Create manifest.json
         shell: Rscript {0}
         run: |
-          setwd("shiny-app-demo-cicd-github-actions")
           rsconnect::writeManifest()
 
       - name: Debug Connect Server Response
