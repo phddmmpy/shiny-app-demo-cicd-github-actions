@@ -12,9 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Test Connectivity to Server
+      - name: Test Connectivity to RStudio Connect
         run: |
-          curl -I ${{ secrets.CONNECT_SERVER }}
+          echo "Testing connectivity to RStudio Connect server..."
+          curl -I -H "Authorization: Key ${{ secrets.CONNECT_API_KEY }}" ${{ secrets.CONNECT_SERVER }}/__api__/v1/content
+        env:
+          CONNECT_SERVER: ${{ secrets.CONNECT_SERVER }}
+          CONNECT_API_KEY: ${{ secrets.CONNECT_API_KEY }}
 
       - uses: r-lib/actions/setup-pandoc@v2
 
