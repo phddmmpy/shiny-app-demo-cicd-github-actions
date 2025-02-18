@@ -38,7 +38,7 @@ jobs:
           Rscript generate_html_script.R
 
       - name: Upload HTML as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@main
         with:
           name: shiny-app-output
           path: ./path/to/generated/html/output.html
