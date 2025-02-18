@@ -42,7 +42,12 @@ jobs:
       - name: Create manifest.json
         shell: Rscript {0}
         run: |
+          setwd("shiny-app-demo-cicd-github-actions")
           rsconnect::writeManifest()
+
+      - name: Debug Connect Server Response
+        run: |
+          curl -I -H "Authorization: Key ${{ secrets.CONNECT_API_KEY }}" ${{ secrets.CONNECT_SERVER }}
           
       - name: Publish Connect content
         uses: rstudio/actions/connect-publish@main
