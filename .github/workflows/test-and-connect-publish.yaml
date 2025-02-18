@@ -34,7 +34,6 @@ jobs:
 
       - name: Generate HTML Output
         run: |
-          # Your command to generate HTML, such as running a R script or any process that produces HTML.
           Rscript generate_html_script.R
 
       - name: Publish Connect content
