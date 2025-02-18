@@ -22,7 +22,7 @@ jobs:
 
       - name: List files in the directory
         run: |
-          ls -la ./shiny-app-demo-cicd-github-actions
+          ls -la ./
 
       - uses: r-lib/actions/setup-pandoc@v2
 
