@@ -59,4 +59,4 @@ jobs:
           url: ${{ secrets.CONNECT_SERVER }}
           api-key: ${{ secrets.CONNECT_API_KEY }}
           access-type: logged_in
-          dir: .:/shiny-app-demo-cicd-github-actions
+          dir: .:/phddmmpy/shiny-app-demo-cicd-github-actions
