@@ -38,7 +38,7 @@ jobs:
             curl -L -H "Authorization: Bearer ${{ secrets.CONNECT_API_KEY }}" -o /tmp/your-content.html ${{ secrets.CONNECT_SERVER }}/phddmmpy/
 
       - name: Upload downloaded content as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@main
         with:
             name: downloaded-content
             path: /tmp/your-content.html
