@@ -32,10 +32,15 @@ jobs:
         run: |
           rsconnect::writeManifest()
 
+      - name: Debug API Response
+        run: |
+        curl -i ${{ secrets.CONNECT_SERVER }}
+
       - name: Publish Connect content
         uses: rstudio/actions/connect-publish@main
         with:
           url: ${{ secrets.CONNECT_SERVER }}
           api-key: ${{ secrets.CONNECT_API_KEY }}
+          access-type: all
           dir: |
             .:/shiny-app-demo-cicd-github-actions
