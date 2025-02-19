@@ -32,15 +32,14 @@ jobs:
         run: |
           rsconnect::writeManifest()
 
-      - name: Debug API Response
+      - name: Download content using curl
         run: |
-          curl -i ${{ secrets.CONNECT_SERVER }}
+            # Use curl to download content from your server and save it to a file
+            curl -L -H "Authorization: Bearer ${{ secrets.CONNECT_API_KEY }}" -o /tmp/your-content.html ${{ secrets.CONNECT_SERVER }}/phddmmpy/
 
-      - name: Publish Connect content
-        uses: rstudio/actions/connect-publish@main
+      - name: Upload downloaded content as artifact
+        uses: actions/upload-artifact@v3
         with:
-          url: ${{ secrets.CONNECT_SERVER }}
-          api-key: ${{ secrets.CONNECT_API_KEY }}
-          access-type: all
-          dir: |
-            .:/shiny-app-demo-cicd-github-actions
+            name: downloaded-content
+            path: /tmp/your-content.html
+
