@@ -34,7 +34,7 @@ jobs:
 
       - name: Debug API Response
         run: |
-        curl -i ${{ secrets.CONNECT_SERVER }}
+          curl -i ${{ secrets.CONNECT_SERVER }}
 
       - name: Publish Connect content
         uses: rstudio/actions/connect-publish@main
